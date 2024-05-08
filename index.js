@@ -3,6 +3,7 @@ const cors = require("cors");
 const config = require("./utils/config");
 const mongoose = require("mongoose");
 const userRouter = require("./routes/userRoutes");
+const productRouter = require("./routes/productRoutes");
 
 // create an express app
 const app = express();
@@ -33,6 +34,7 @@ app.get("/", (request, response) => {
 });
 
 app.use("/users", userRouter);
+app.use("/products", productRouter);
 
 // Listen to the PORT for requests
 app.listen(config.PORT, () => {
