@@ -35,6 +35,7 @@ app.get("/", (request, response) => {
 
 app.use("/users", userRouter);
 app.use("/products", productRouter);
+app.use("/uploads", express.static("uploads"));
 
 // Listen to the PORT for requests
 app.listen(config.PORT, () => {
