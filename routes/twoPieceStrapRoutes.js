@@ -23,5 +23,9 @@ twoPieceStrapRouter.post(
   upload,
   twoPieceStrapController.createProduct
 );
+twoPieceStrapRouter.get(
+  "/getAllProducts",
+  twoPieceStrapController.getAllProducts
+);
 
 module.exports = twoPieceStrapRouter;
