@@ -4,6 +4,9 @@ const config = require("./utils/config");
 const mongoose = require("mongoose");
 const userRouter = require("./routes/userRoutes");
 const productRouter = require("./routes/productRoutes");
+const natoStrapRouter = require("./routes/natoStrapRoutes");
+const twoPieceStrapRouter = require("./routes/twoPieceStrapRoutes");
+const fineLeatherRouter = require("./routes/fineLeatherRoutes");
 
 // create an express app
 const app = express();
@@ -35,6 +38,9 @@ app.get("/", (request, response) => {
 
 app.use("/users", userRouter);
 app.use("/products", productRouter);
+app.use("/Accessories/natoStrap", natoStrapRouter);
+app.use("/Accessories/twopiecestrap", twoPieceStrapRouter);
+app.use("/Accessories/fineleather", fineLeatherRouter);
 app.use("/uploads", express.static("uploads"));
 
 // Listen to the PORT for requests
