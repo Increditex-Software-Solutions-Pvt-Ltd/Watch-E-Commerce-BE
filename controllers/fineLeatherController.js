@@ -65,7 +65,7 @@ const fineLeatherController = {
   getAllProducts: async (req, res) => {
     try {
       // Fetch all products from the database
-      const products = await TwoPieceStrap.find();
+      const products = await FineLeather.find();
       const totalQuantity = products.reduce(
         (acc, cur) => acc + cur.quantity,
         0
