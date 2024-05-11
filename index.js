@@ -7,6 +7,7 @@ const productRouter = require("./routes/productRoutes");
 const natoStrapRouter = require("./routes/natoStrapRoutes");
 const twoPieceStrapRouter = require("./routes/twoPieceStrapRoutes");
 const fineLeatherRouter = require("./routes/fineLeatherRoutes");
+const braceletsRouter = require("./routes/braceletsRoutes");
 
 // create an express app
 const app = express();
@@ -41,6 +42,7 @@ app.use("/products", productRouter);
 app.use("/Accessories/natoStrap", natoStrapRouter);
 app.use("/Accessories/twopiecestrap", twoPieceStrapRouter);
 app.use("/Accessories/fineleather", fineLeatherRouter);
+app.use("/Accessories/bracelet", braceletsRouter);
 app.use("/uploads", express.static("uploads"));
 
 // Listen to the PORT for requests
