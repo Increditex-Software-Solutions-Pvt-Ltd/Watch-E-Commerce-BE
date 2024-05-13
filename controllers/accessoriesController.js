@@ -39,30 +39,35 @@ const accessoriesController = {
       res.status(200).json([
         {
           name: "Nato Straps",
+          collectionName: "NatoStrap",
           logo: natoStrapProducts[0].images[0],
           "Total Products": natoStrapProducts.length,
           "Total Quantity": totalQuantityNatoStraps,
         },
         {
           name: "Two Piece Straps",
+          collectionName: "TwoPieceStrap",
           logo: twoPieceStrapProducts[0].images[0],
           "Total Products": twoPieceStrapProducts.length,
           "Total Quantity": totalQuantityTwoPieceStraps,
         },
         {
           name: "Fine Leather",
+          collectionName: "FineLeather",
           logo: fineLeatherProducts[0].images[0],
           "Total Products": fineLeatherProducts.length,
           "Total Quantity": totalQuantityFineLeather,
         },
         {
           name: "Bracelets",
+          collectionName: "Bracelet",
           logo: braceletsProducts[0].images[0],
           "Total Products": braceletsProducts.length,
           "Total Quantity": totalQuantityBracelets,
         },
         {
           name: "Cufflinks",
+          collectionName: "Cufflinks",
           logo: cufflinksProducts[0].images[0],
           "Total Products": cufflinksProducts.length,
           "Total Quantity": totalQuantityCufflinks,
@@ -77,13 +82,28 @@ const accessoriesController = {
     try {
       const productId = req.params.id;
       const accessory =
-        NatoStrap.findOne(productId) ||
-        TwoPieceStrap.findOne(productId) ||
-        FineLeather.findOne(productId) ||
-        Bracelet.findOne(productId) ||
-        Cufflinks.findOne(productId);
-
+        (await NatoStrap.findById(productId)) ||
+        (await TwoPieceStrap.findById(productId)) ||
+        (await FineLeather.findById(productId)) ||
+        (await Bracelet.findById(productId)) ||
+        (await Cufflinks.findById(productId));
+      if (!accessory) {
+        return res.status(404).json({ message: "Accessory not found" });
+      }
       res.status(200).json({ product: accessory });
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
+  getListByCollection: async (req, res) => {
+    try {
+      const name = req.params.name;
+      const collectionList = await name.find();
+      if (!collectionList) {
+        return res.status(404).json({ message: "List not found" });
+      }
+      res.status(200).json({ collectionList });
     } catch (error) {
       console.error("Error fetching products:", error);
       res.status(500).json({ message: "Internal Server Error" });
