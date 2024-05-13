@@ -1,12 +1,12 @@
 const express = require("express");
-const braceletsRouter = express.Router();
+const cufflinksRouter = express.Router();
 const multer = require("multer");
-const braceletController = require("../controllers/braceletsController");
+const cufflinksController = require("../controllers/cufflinksController");
 
 // Multer storage configuration
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/bracelets/"); // Destination folder for uploaded images
+    cb(null, "uploads/cufflinks/"); // Destination folder for uploaded images
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).array("images", 5); // Allow uploading multiple images with the field name 'images'
 
 // Route for handling image uploads and creating a new product
-braceletsRouter.post("/create", upload, braceletController.createProduct);
-braceletsRouter.get("/getAllProducts", braceletController.getAllProducts);
+cufflinksRouter.post("/create", upload, cufflinksController.createProduct);
+cufflinksRouter.get("/getAllProducts", cufflinksController.getAllProducts);
 
-module.exports = braceletsRouter;
+module.exports = cufflinksRouter;

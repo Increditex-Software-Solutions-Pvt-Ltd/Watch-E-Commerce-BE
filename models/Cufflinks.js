@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const braceletSchema = new Schema({
+const cufflinkSchema = new Schema({
   modelName: {
     type: String,
     required: true,
@@ -42,11 +42,22 @@ const braceletSchema = new Schema({
     type: String,
     required: true,
   },
-  diameter: {
+  width: {
+    type: String,
+    required: true,
+  },
+  height: {
+    type: String,
+  },
+  length: {
     type: String,
     required: true,
   },
   material: {
+    type: String,
+    required: true,
+  },
+  claspType: {
     type: String,
     required: true,
   },
@@ -66,12 +77,12 @@ const braceletSchema = new Schema({
 });
 
 // Middleware to update 'updatedAt' field before saving
-braceletSchema.pre("save", function (next) {
+cufflinkSchema.pre("save", function (next) {
   this.updatedAt = new Date();
   next();
 });
 
-braceletSchema.set("toJSON", {
+cufflinkSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.productId = returnedObject._id;
     delete returnedObject._id;
@@ -79,4 +90,4 @@ braceletSchema.set("toJSON", {
   },
 });
 
-module.exports = mongoose.model("Bracelet", braceletSchema);
+module.exports = mongoose.model("Cufflinks", cufflinkSchema);
