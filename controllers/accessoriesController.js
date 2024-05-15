@@ -99,11 +99,31 @@ const accessoriesController = {
   getListByCollection: async (req, res) => {
     try {
       const name = req.params.name;
-      const collectionList = await name.find();
+      let collectionList;
+
+      if (name === "NatoStrap") {
+        collectionList = await NatoStrap.find();
+      } else if (name === "TwoPieceStrap") {
+        collectionList = await TwoPieceStrap.find();
+      } else if (name === "Bracelet") {
+        collectionList = await Bracelet.find();
+      } else if (name === "FineLeather") {
+        collectionList = await FineLeather.find();
+      } else {
+        collectionList = await Cufflinks.find();
+      }
+      const totalQuantity = collectionList.reduce(
+        (acc, cur) => acc + cur.quantity,
+        0
+      );
       if (!collectionList) {
         return res.status(404).json({ message: "List not found" });
       }
-      res.status(200).json({ collectionList });
+      res.status(200).json({
+        "Total Products": collectionList.length,
+        "Total Quantity": totalQuantity,
+        Products: collectionList,
+      });
     } catch (error) {
       console.error("Error fetching products:", error);
       res.status(500).json({ message: "Internal Server Error" });

@@ -16,6 +16,7 @@ const cufflinksController = {
         width,
         height,
         length,
+        diameter,
         material,
         claspType,
         quantity,
@@ -35,6 +36,7 @@ const cufflinksController = {
         width,
         height,
         length,
+        diameter,
         material,
         claspType,
       });
@@ -64,6 +66,7 @@ const cufflinksController = {
           width,
           height,
           length,
+          diameter,
           material,
           claspType,
           quantity,

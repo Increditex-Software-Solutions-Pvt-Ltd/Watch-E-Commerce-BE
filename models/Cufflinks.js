@@ -44,14 +44,15 @@ const cufflinkSchema = new Schema({
   },
   width: {
     type: String,
-    required: true,
   },
   height: {
     type: String,
   },
   length: {
     type: String,
-    required: true,
+  },
+  diameter: {
+    type: String,
   },
   material: {
     type: String,
