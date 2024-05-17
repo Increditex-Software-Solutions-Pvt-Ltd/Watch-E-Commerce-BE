@@ -36,7 +36,7 @@ const accessoriesController = {
         0
       );
       const sunglassesProducts = await Sunglasses.find();
-      const totalQuantitySunglasses = csunglassesProducts.reduce(
+      const totalQuantitySunglasses = sunglassesProducts.reduce(
         (acc, cur) => acc + cur.quantity,
         0
       );
