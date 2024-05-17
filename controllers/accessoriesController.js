@@ -2,6 +2,7 @@ const Bracelet = require("../models/Bracelet");
 const Cufflinks = require("../models/Cufflinks");
 const FineLeather = require("../models/FineLeather");
 const NatoStrap = require("../models/NatoStrap");
+const Sunglasses = require("../models/Sunglasses");
 const TwoPieceStrap = require("../models/TwoPieceStrap");
 
 const accessoriesController = {
@@ -31,6 +32,11 @@ const accessoriesController = {
       );
       const cufflinksProducts = await Cufflinks.find();
       const totalQuantityCufflinks = cufflinksProducts.reduce(
+        (acc, cur) => acc + cur.quantity,
+        0
+      );
+      const sunglassesProducts = await Sunglasses.find();
+      const totalQuantitySunglasses = csunglassesProducts.reduce(
         (acc, cur) => acc + cur.quantity,
         0
       );
@@ -72,6 +78,13 @@ const accessoriesController = {
           "Total Products": cufflinksProducts.length,
           "Total Quantity": totalQuantityCufflinks,
         },
+        {
+          name: "Sunglasses",
+          collectionName: "Sunglasses",
+          logo: sunglassesProducts[0].images[0],
+          "Total Products": sunglassesProducts.length,
+          "Total Quantity": totalQuantitySunglasses,
+        },
       ]);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -109,8 +122,10 @@ const accessoriesController = {
         collectionList = await Bracelet.find();
       } else if (name === "FineLeather") {
         collectionList = await FineLeather.find();
-      } else {
+      } else if (name === "Cufflinks") {
         collectionList = await Cufflinks.find();
+      } else if (name === "Sunglasses") {
+        collectionList = await Sunglasses.find();
       }
       const totalQuantity = collectionList.reduce(
         (acc, cur) => acc + cur.quantity,

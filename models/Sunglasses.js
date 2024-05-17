@@ -42,7 +42,7 @@ const sunglassesSchema = new Schema({
   filterCategory: {
     type: String,
   },
-  Dimensions: {
+  dimensions: {
     type: String,
   },
   quantity: {
