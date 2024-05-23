@@ -16,7 +16,6 @@ const keyholderSchema = new Schema({
   },
   edition: {
     type: String,
-    required: true,
   },
   category: {
     type: String,
