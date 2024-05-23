@@ -126,8 +126,9 @@ const accessoriesController = {
         (await FineLeather.findById(productId)) ||
         (await Bracelet.findById(productId)) ||
         (await Cufflinks.findById(productId)) ||
-        (await Sunglasses.findById(productId));
-      (await Belt.findById(productId)) || (await Keyholder.findById(productId));
+        (await Sunglasses.findById(productId)) ||
+        (await Belt.findById(productId)) ||
+        (await Keyholder.findById(productId));
       if (!accessory) {
         return res.status(404).json({ message: "Accessory not found" });
       }
