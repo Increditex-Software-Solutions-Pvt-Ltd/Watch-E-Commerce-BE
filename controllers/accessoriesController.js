@@ -1,6 +1,8 @@
+const Belt = require("../models/Belt");
 const Bracelet = require("../models/Bracelet");
 const Cufflinks = require("../models/Cufflinks");
 const FineLeather = require("../models/FineLeather");
+const Keyholder = require("../models/Keyholder");
 const NatoStrap = require("../models/NatoStrap");
 const Sunglasses = require("../models/Sunglasses");
 const TwoPieceStrap = require("../models/TwoPieceStrap");
@@ -37,6 +39,16 @@ const accessoriesController = {
       );
       const sunglassesProducts = await Sunglasses.find();
       const totalQuantitySunglasses = sunglassesProducts.reduce(
+        (acc, cur) => acc + cur.quantity,
+        0
+      );
+      const beltsProducts = await Belt.find();
+      const totalQuantityBelts = beltsProducts.reduce(
+        (acc, cur) => acc + cur.quantity,
+        0
+      );
+      const keyholderProducts = await Keyholder.find();
+      const totalQuantityKeyholder = keyholderProducts.reduce(
         (acc, cur) => acc + cur.quantity,
         0
       );
@@ -85,6 +97,20 @@ const accessoriesController = {
           "Total Products": sunglassesProducts.length,
           "Total Quantity": totalQuantitySunglasses,
         },
+        {
+          name: "Belts",
+          collectionName: "Belts",
+          logo: beltsProducts[0].images[0],
+          "Total Products": beltsProducts.length,
+          "Total Quantity": totalQuantityBelts,
+        },
+        {
+          name: "Keyholder",
+          collectionName: "Keyholder",
+          logo: keyholderProducts[0].images[0],
+          "Total Products": keyholderProducts.length,
+          "Total Quantity": totalQuantityKeyholder,
+        },
       ]);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -101,6 +127,7 @@ const accessoriesController = {
         (await Bracelet.findById(productId)) ||
         (await Cufflinks.findById(productId)) ||
         (await Sunglasses.findById(productId));
+      (await Belt.findById(productId)) || (await Keyholder.findById(productId));
       if (!accessory) {
         return res.status(404).json({ message: "Accessory not found" });
       }
@@ -127,6 +154,10 @@ const accessoriesController = {
         collectionList = await Cufflinks.find();
       } else if (name === "Sunglasses") {
         collectionList = await Sunglasses.find();
+      } else if (name === "Belts") {
+        collectionList = await Belt.find();
+      } else if (name === "Keyholder") {
+        collectionList = await Keyholder.find();
       }
       const totalQuantity = collectionList.reduce(
         (acc, cur) => acc + cur.quantity,

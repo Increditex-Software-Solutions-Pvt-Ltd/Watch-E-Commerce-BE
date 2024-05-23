@@ -48,6 +48,9 @@ const keyholderSchema = new Schema({
   size: {
     type: String,
   },
+  diameter: {
+    type: String,
+  },
   width: {
     type: String,
   },
