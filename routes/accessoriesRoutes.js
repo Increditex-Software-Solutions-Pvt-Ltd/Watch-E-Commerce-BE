@@ -6,7 +6,7 @@ const accessoriesRouter = express.Router();
 accessoriesRouter.get("/getList", accessoriesController.getList);
 accessoriesRouter.get("/:id", accessoriesController.getById);
 accessoriesRouter.get(
-  "/collection/:name",
+  "/category/:name",
   accessoriesController.getListByCollection
 );
 
