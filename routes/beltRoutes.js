@@ -19,6 +19,8 @@ const upload = multer({ storage: storage }).array("images", 5); // Allow uploadi
 
 // Route for handling image uploads and creating a new product
 beltRouter.post("/create", upload, beltController.createProduct);
+beltRouter.put("/:id", upload, beltController.updateById);
+beltRouter.delete("/:id", beltController.deleteById);
 beltRouter.get("/getAllProducts", beltController.getAllProducts);
 
 module.exports = beltRouter;

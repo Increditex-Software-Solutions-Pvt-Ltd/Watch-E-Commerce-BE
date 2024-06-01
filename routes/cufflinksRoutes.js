@@ -19,6 +19,8 @@ const upload = multer({ storage: storage }).array("images", 5); // Allow uploadi
 
 // Route for handling image uploads and creating a new product
 cufflinksRouter.post("/create", upload, cufflinksController.createProduct);
+cufflinksRouter.put("/:id", upload, cufflinksController.updateById);
+cufflinksRouter.delete("/:id", cufflinksController.deleteById);
 cufflinksRouter.get("/getAllProducts", cufflinksController.getAllProducts);
 
 module.exports = cufflinksRouter;

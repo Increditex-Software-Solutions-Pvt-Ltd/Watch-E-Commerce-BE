@@ -24,6 +24,10 @@ productRouter.get("/getAllproducts", productController.getAllProducts);
 
 productRouter.get("/:id", productController.getProductById);
 
+productRouter.put("/:id", upload, productController.updateProductById);
+
+productRouter.delete("/:id", productController.deleteProductById);
+
 productRouter.get(
   "/collection/:collectionName",
   productController.getProductsByCollection

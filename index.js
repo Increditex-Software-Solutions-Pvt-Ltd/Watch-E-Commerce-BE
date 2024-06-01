@@ -13,6 +13,8 @@ const accessoriesRouter = require("./routes/accessoriesRoutes");
 const sunglassesRouter = require("./routes/sunglassesRoutes");
 const beltRouter = require("./routes/beltRoutes");
 const keyholderRouter = require("./routes/keyholderRoutes");
+const adminRouter = require("./routes/adminRoutes");
+const orderRouter = require("./routes/orderRoutes");
 
 // create an express app
 const app = express();
@@ -43,7 +45,9 @@ app.get("/", (request, response) => {
 });
 
 app.use("/users", userRouter);
+app.use("/admins", adminRouter);
 app.use("/products", productRouter);
+app.use("/orders", orderRouter);
 app.use("/accessories", accessoriesRouter);
 app.use("/Accessories/natoStrap", natoStrapRouter);
 app.use("/Accessories/twopiecestrap", twoPieceStrapRouter);

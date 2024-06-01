@@ -19,6 +19,8 @@ const upload = multer({ storage: storage }).array("images", 5); // Allow uploadi
 
 // Route for handling image uploads and creating a new product
 braceletsRouter.post("/create", upload, braceletController.createProduct);
+braceletsRouter.put("/:id", upload, braceletController.updateById);
+braceletsRouter.delete("/:id", braceletController.deleteById);
 braceletsRouter.get("/getAllProducts", braceletController.getAllProducts);
 
 module.exports = braceletsRouter;

@@ -19,6 +19,8 @@ const upload = multer({ storage: storage }).array("images", 5); // Allow uploadi
 
 // Route for handling image uploads and creating a new product
 natoStrapRouter.post("/create", upload, natoStrapController.createProduct);
+natoStrapRouter.put("/:id", upload, natoStrapController.updateById);
+natoStrapRouter.delete("/:id", natoStrapController.deleteById);
 natoStrapRouter.get("/getAllProducts", natoStrapController.getAllProducts);
 
 module.exports = natoStrapRouter;

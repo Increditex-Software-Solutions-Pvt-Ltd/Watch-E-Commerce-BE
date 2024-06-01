@@ -19,6 +19,8 @@ const upload = multer({ storage: storage }).array("images", 5); // Allow uploadi
 
 // Route for handling image uploads and creating a new product
 keyholderRouter.post("/create", upload, keyholderController.createProduct);
+keyholderRouter.put("/:id", upload, keyholderController.updateById);
+keyholderRouter.delete("/:id", keyholderController.deleteById);
 keyholderRouter.get("/getAllProducts", keyholderController.getAllProducts);
 
 module.exports = keyholderRouter;

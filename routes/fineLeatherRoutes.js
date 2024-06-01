@@ -19,6 +19,8 @@ const upload = multer({ storage: storage }).array("images", 5); // Allow uploadi
 
 // Route for handling image uploads and creating a new product
 fineLeatherRouter.post("/create", upload, fineLeatherController.createProduct);
+fineLeatherRouter.put("/:id", upload, fineLeatherController.updateById);
+fineLeatherRouter.delete("/:id", fineLeatherController.deleteById);
 fineLeatherRouter.get("/getAllProducts", fineLeatherController.getAllProducts);
 
 module.exports = fineLeatherRouter;

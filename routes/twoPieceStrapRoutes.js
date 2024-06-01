@@ -23,6 +23,8 @@ twoPieceStrapRouter.post(
   upload,
   twoPieceStrapController.createProduct
 );
+twoPieceStrapRouter.put("/:id", upload, twoPieceStrapController.updateById);
+twoPieceStrapRouter.delete("/:id", twoPieceStrapController.deleteById);
 twoPieceStrapRouter.get(
   "/getAllProducts",
   twoPieceStrapController.getAllProducts
