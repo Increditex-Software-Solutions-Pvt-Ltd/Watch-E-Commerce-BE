@@ -23,10 +23,11 @@ const userSchema = new schema({
       },
       message: (props) => `${props.value} is not a valid phone number!`,
     },
-    required: true,
+    required: false,
   },
   address: {
     type: String,
+    required:false,
   },
   password: {
     type: String,
