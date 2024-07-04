@@ -48,9 +48,9 @@ const userController = {
         const storedPassword = user.password;
         const isPasswordMatch = await bcrypt.compare(password, storedPassword);
         if (isPasswordMatch) {
-          const token = jwt.sign({ id: user.userId }, config.SECRET_KEY);
+          const token = jwt.sign({ id: user._id }, config.SECRET_KEY);
           res.header({ "x-auth-token": token });
-          res.send({ message: "Successful Login", token: token, user: user });
+          res.send({ message: "Successful Login", token: token, userId:user._id });
         } else {
           res.send({ message: "Invalid Credentials" });
         }
