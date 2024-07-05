@@ -7,7 +7,7 @@ const User = require("../models/User");
 const userController = {
   register: async (req, res) => {
     try {
-      const {firstName, lastName, email, phoneNumber,password, address=null,title=null,flatno=null,pincode=null,state=null } =
+      const {firstName, lastName, email, phoneNumber,password, address=null,city=null,flatno=null,pincode=null,state=null } =
         req.body;
 
       const existingUser = await User.findOne({ emailId: email });
@@ -25,11 +25,11 @@ const userController = {
           address,
           phoneNumber,
           password: hashedPassword,
-          title,
           address,
           flatno,
           state,
-          pincode
+          pincode,
+          city
         });
 
         const savedUser = await user.save();
@@ -89,7 +89,7 @@ const userController = {
     const userToPatch = request.body;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return response.status(400).json({ error: "Invalid user ID" });
+      return res.status(400).json({ error: "Invalid user ID" });
     }
 
     try {
@@ -97,11 +97,11 @@ const userController = {
        if (!updateduser) {
         return res.status(404).json({ error: "User not found" });
       }
-      response.status(200).json({ message: "Update Successful", user: updateduser });
+      res.status(200).json({ message: "Update Successful", user: updateduser });
   
     } catch (error) {
       console.error("Error updating user:", error);
-      response.status(500).json({ error: "Internal server error" });
+      res.status(500).json({ error: "Internal server error" });
     }
     
   },

@@ -3,10 +3,7 @@ const schema = mongoose.Schema;
 
 // schema
 const userSchema = new schema({
-  title:{
-     type:String,
-     required:false
-  },
+
   firstName: {
     type: String,
     required: true,
@@ -38,6 +35,10 @@ const userSchema = new schema({
     required:false,
   },
   pincode:{
+    type: String,
+    required:false,
+  },
+  city:{
     type: String,
     required:false,
   },
