@@ -7,7 +7,7 @@ const User = require("../models/User");
 const userController = {
   register: async (req, res) => {
     try {
-      const { firstName, lastName, email, phoneNumber, address, password } =
+      const {firstName, lastName, email, phoneNumber,password, address=null,title=null,flatno=null,pincode=null,state=null } =
         req.body;
 
       const existingUser = await User.findOne({ emailId: email });
@@ -25,6 +25,11 @@ const userController = {
           address,
           phoneNumber,
           password: hashedPassword,
+          title,
+          address,
+          flatno,
+          state,
+          pincode
         });
 
         const savedUser = await user.save();
@@ -79,22 +84,26 @@ const userController = {
       res.status(400).json({ message: "Server Error", error });
     }
   },
-  editUserbyId: async (request, response) => {
+  editUserbyId: async (req, res) => {
     const id = request.params.id;
     const userToPatch = request.body;
 
-    User.findByIdAndUpdate(id, userToPatch)
-      .then((updateduser) => {
-        if (!updateduser) {
-          return response.status(404).json({ error: "user not found" });
-        }
-        response
-          .status(201)
-          .json({ message: "Update Successful", updateduser });
-      })
-      .catch((error) => {
-        response.status(500).json({ error: "Internal server error" });
-      });
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return response.status(400).json({ error: "Invalid user ID" });
+    }
+
+    try {
+       const updateduser = User.findByIdAndUpdate(id,userToPatch, { new: true, runValidators: true });
+       if (!updateduser) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      response.status(200).json({ message: "Update Successful", user: updateduser });
+  
+    } catch (error) {
+      console.error("Error updating user:", error);
+      response.status(500).json({ error: "Internal server error" });
+    }
+    
   },
   deleteUserbyId: async (req, res) => {
     async (req, res) => {
