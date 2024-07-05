@@ -3,6 +3,10 @@ const schema = mongoose.Schema;
 
 // schema
 const userSchema = new schema({
+  title:{
+     type:String,
+     required:false
+  },
   firstName: {
     type: String,
     required: true,
@@ -23,9 +27,21 @@ const userSchema = new schema({
       },
       message: (props) => `${props.value} is not a valid phone number!`,
     },
-    required: false,
+    required: true,
   },
   address: {
+    type: String,
+    required:false,
+  },
+  flatno:{
+    type: String,
+    required:false,
+  },
+  pincode:{
+    type: String,
+    required:false,
+  },
+  state:{
     type: String,
     required:false,
   },
